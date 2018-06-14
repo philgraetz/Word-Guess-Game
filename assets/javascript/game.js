@@ -17,7 +17,7 @@ wggController = {
     // Called when page is first displayed
     initialize: function() {
         this.waitingForStart = true;
-        this.displayStatus("I'm going to have you go ahead and press any key...");
+        this.displayStatus("If you could just go ahead and press any key, that'd be great...");
         this.model = wggModel;
         this.model.initialize();
     },
@@ -109,14 +109,14 @@ wggController = {
         // Check for letters a-z
         patt = /^[a-z]$/i;
         if (!patt.test(key)) {
-            var statusMsg = "Fool! '" + key + "' is not a letter. Guess an actual letter this time.";
+            var statusMsg = "'" + key + "' is not a letter. What would you say...you do here?";
             this.displayStatus(statusMsg);
             return;
         }
 
         // Did you already guess this letter?
         if (this.model.isAlreadyGuessed(key)) {
-            var statusMsg = "Letter '" + key + "' was already guessed";
+            var statusMsg = "Letter '" + key + "' was already guessed. Did you get the memo?";
             this.displayStatus(statusMsg);
             return;
         }
@@ -130,7 +130,7 @@ wggController = {
                 this.displayStatus("You won! Press ANY key for new game.");
             }
             else {
-                this.displayStatus("You lost! Press ANY key for new game.");
+                this.displayStatus("You lost! Is today the worst day of your life?");
             }
             // Now wait to start a new game 
             // (by pressing the ANY key again)
@@ -172,6 +172,7 @@ wggModel = {
         this.guessesLeft = 15;
         this.guessedLetters = [];
         this.isDone = false;
+        this.isWon = false;
 
         // Pick a word
         this.wordToGuess = this.getWord();
@@ -220,6 +221,7 @@ wggModel = {
                 this.isWon = true;
                 this.isDone = true;
                 this.wins++;
+                break; // From while
             }
 
             // Check for another instance of this letter
