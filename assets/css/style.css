@@ -1,2 +1,52 @@
 /* CSS for Word Guess Game */
 
+body {
+    background-color: #d9c3a9;
+}
+
+#gameTitle {
+    /* font-size: 3em; */
+    font-family: Comic Sans, Comic Sans MS, cursive;
+}
+.currentWordLetter {
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 2em;
+    background-color: #f2efbd;
+    color: #4d5973;
+    padding: 0 .5em 0  .5em;
+}
+.guessedLetter {
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 1em;
+    background-color: #f2efbd;
+    color: #4d5973;
+    padding: .1em;
+}
+#winsLabel, #winsDisplay, #guessesLeftLabel {
+    font-family: Comic Sans, Comic Sans MS, cursive;
+    font-size: 1em;
+    background-color: #f2efbd;
+    color: #4d5973;
+    padding: .1em;
+}
+
+#statusDisplay, #snarkDisplay {
+    font-family: Comic Sans, Comic Sans MS, cursive;
+    font-size: 1em;
+    background-color: #f2efbd;
+    color: #4d5973;
+}
+#snarkyDisplay {
+    height: 5em;
+}
+.my-progress { 
+    background-color: #f2efbd;
+}
+.my-progress-bar { 
+    background-color:#4d5973; 
+}
+.photoBox {
+    height: 100%;
+    padding-bottom: 2em;
+}
+

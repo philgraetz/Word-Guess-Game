@@ -3,38 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Word Guess Game</title>
 </head>
 <body>
-    <h1>Word Guess Game</h1>
-    <div id="statusDisplay">Press ANY KEY to start</div> <br>
-    <div id="winsSection">
-        <div id="winsLabel">Wins:&nbsp;</div>
-        <div id="winsDisplay"></div>
-        <br>
-    </div>
-    <div id="currentWordSection">
-        <div id="currentWordLabel">Current Word:&nbsp;</div>
-        <code id="currentWordDisplay" style="font-family:Courier"></code>
-        <br><br>
-    </div>
-    <div id="guessesLeftSection">
-        <div id="guessesLeftLabel">Guesses Left:&nbsp</div>
-        <div id="guessesLeftDisplay"></div>
-        <br>
-    </div>
-    <div id="guessedLettersSection">
-        <div id="guessedLettersLabel">Guessed Letters:&nbsp;</div>
-        <code id="guessedLettersDisplay" style="font-family:Courier"></code>
-        <br>
-    </div>
-    <div id="resultOfGame">
-        <div id="resultOfGameDisplay"></div>
-        <br>
-    </div>
+    <div class="container bg bg-white mt-4 mb-4 pl-5 pr-5">
+        <!-- Theme and Title -->
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 text-center">
+                <div class="mt-4" id="themeBox">
+                    <img src="assets/images/office-space-title-50.jpg" height=80px">
+                </div>
+                <h1 id="gameTitle">Word Guess Game</h1>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
 
-    <!-- JavaScript -->
+        <!-- Current Word -->
+        <div class="row">
+            <div class="col-md-12 text-center p-2">
+                <div id="currentWordDisplay"></div>
+            </div>
+        </div>
+
+        <!-- Guessed/Remaining Letters -->
+        <div class="row">
+            <div class="col-md-1" id=></div>
+            <div class="col-md-10 text-center">
+                <p id="guessedLettersDisplay"></p>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+        <!-- Wins and Guesses Remaining -->
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <p id="winsSection">
+                    <scan id="winsLabel">Wins</scan><scan id="winsDisplay"></scan>
+                </p>
+            </div>
+            <div class="col-md-2">
+                <p id="guessesLeftLabel">Guesses Left</p>
+            </div>
+            <div class="col-md-6">
+                <div class="progress my-progress">
+                    <div class="progress-bar my-progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" 
+                        style="width:30%" id="guessesLeftDisplay">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+        <!-- Status Messages -->
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <p id="statusDisplay"></p>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+        <!-- Snarky Comments -->
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <p id="snarkDisplay"></p>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+        <!-- Photos -->
+        <div class="row">
+            <div class="col-md-2">
+                <div class="photoBox">
+                    <img src="assets/images/initech-logo.jpg" width="160px">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="photoBox">
+                    <img src="assets/images/milton-stapler.jpg" width="160px">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="photoBox">
+                    <img src="assets/images/lumbergh.jpg" width="160px">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="photoBox">
+                    <img src="assets/images/bob-and-bob.jpg" width="160px">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="photoBox">
+                    <img src="assets/images/peter.jpg" width="160px">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="photoBox">
+                    <img src="assets/images/copier-bash.jpg" width="160px">
+                </div>
+            </div>
+
+        </div>
+
+    </div> <!-- Container -->
+
+    <!-- BOOTSTRAP JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+    <!-- Word Guess Game JavaScript -->
     <script src="assets/javascript/game.js"></script>
 </body>
 </html>

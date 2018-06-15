@@ -18,6 +18,7 @@ wggController = {
     initialize: function() {
         this.waitingForStart = true;
         this.displayStatus("If you could just go ahead and press any key, that'd be great...");
+        this.displaySnarkClear();
         this.model = wggModel;
         this.model.initialize();
     },
@@ -26,55 +27,81 @@ wggController = {
     displayStatus: function (message) {
         document.getElementById("statusDisplay").innerText = message;
     },
+    displaySnark: function (isSnarky) {
+        var snark = [
+            "Did you get the memo?",
+            "Looks like someone has a case of the Mondays.",
+            "Wow, that's messed up.",
+            "Well, at least your name isn't Michael Bolton.",
+            "Is today the worst day of your life?",
+            "Is this good for the COMPANY?",
+            "What would you say...you do here?",
+        ];
+        var nonSnark = [
+            "You're a straight-shooter.",
+            "You have 'upper management' written all over you.",
+        ];
+        var arr = snark;
+        if (!isSnarky) {
+            arr = nonSnark;
+        }
+        var idx = Math.floor(Math.random() * arr.length);
+        var elt = document.getElementById("snarkDisplay");
+        elt.innerHTML = arr[idx];
+    },
+    displaySnarkClear: function () {
+        var elt = document.getElementById("snarkDisplay");
+        elt.innerHTML = "&nbsp;";
+    },
     displayWins: function(wins) {
         var elt = document.getElementById("winsDisplay");
         elt.innerHTML = wins;
     },
-    displayCurrentWord: function(currentWord) {
-        var elt = document.getElementById("currentWordDisplay");
-        s1 = "";
-        for (var i in currentWord) {
-            if (i > 0) {
-                s1 += " "; // Add space between
-            }
-            if (currentWord[i] === " ") {
-                s1 += "_";
-            } else {
-                s1 += currentWord[i];
-            }
-        }
-        elt.innerHTML = s1;
-    },
     displayGuessesLeft: function(guessesLeft) {
         var elt = document.getElementById("guessesLeftDisplay");
+        var perCent = Math.round((guessesLeft/15)*100) + "%";
+        elt.setAttribute("style", "width:" + perCent);
         elt.innerHTML = guessesLeft;
     },
-    displayGuessedLetters: function(letterArray) {
-        // Create a string with letters in order and blanks
-        // for letters not yet guessed (and spaces between each position)
-        // Requires setting 'innerHTML' (because we're using HTML symbols)
-        // and using '&nbsp;' for spaces (otherwise spaces will collapse)
-        
-        // First create string with spaces
-        var s1 = ". ".repeat(25); // 2 spaces for 1st 25 letters
-        s1 += " ";                // 1 space for final letter
+    makeSpanChildren: function(parent, string1, classToAdd) {
+        var childList = parent.childNodes;
 
-        // Replace the space with the letter in its appropriate position
+        // Remove all the previously added children
+        while (parent.childNodes.length > 0) {
+            parent.removeChild(parent.childNodes[0]);
+        }
+
+        // Add a new set of children
+        for (var ii in string1) {
+            var newElt = document.createElement("span");
+            newElt.innerText = string1.charAt(ii);
+            newElt.setAttribute("class", classToAdd);
+            parent.appendChild(newElt);
+        }
+    },
+    displayCurrentWord: function(currentWord) {
+        var s1 = (currentWord === "") ? "-" : currentWord;
+        var elt = document.getElementById("currentWordDisplay");
+        this.makeSpanChildren(elt, s1, "currentWordLetter");
+    },
+    displayGuessedLetters: function(letterArray) {
+        // First create string of all letters
+        var s1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        // Replace the letter with . for letters guessed
         for (var letterIndex in letterArray) {
             var upr = letterArray[letterIndex].toUpperCase();
             var charCode = upr.charCodeAt(0);
             var index = charCode - 65; // since "A" is char code 65
     
             // Replace the appropriate space with this letter
-            s1 = s1.slice(0, index*2) + upr + s1.slice(index*2+1);
+            s1 = s1.slice(0, index) + "." + s1.slice(index+1);
         }
-
-        // Replace all the spaces with '&nbsp;'
-        s1 = s1.replace(/ /g, "&nbsp;");
 
         // Now we can display it
         var elt = document.getElementById("guessedLettersDisplay");
-        elt.innerHTML = s1;
+        this.makeSpanChildren(elt, s1, "guessedLetter");
+
     },
 
     // Start new game
@@ -93,6 +120,8 @@ wggController = {
     processKeyPress: function(key) {
         // A key was pressed - do something
 
+        this.displaySnarkClear();
+
         // If we're waiting to start the game,
         // then someone pressed the ANY key.
         // Start the new game and return.
@@ -109,15 +138,17 @@ wggController = {
         // Check for letters a-z
         patt = /^[a-z]$/i;
         if (!patt.test(key)) {
-            var statusMsg = "'" + key + "' is not a letter. What would you say...you do here?";
+            var statusMsg = "'" + key + "' is not a letter.";
             this.displayStatus(statusMsg);
+            this.displaySnark(true);
             return;
         }
 
         // Did you already guess this letter?
         if (this.model.isAlreadyGuessed(key)) {
-            var statusMsg = "Letter '" + key + "' was already guessed. Did you get the memo?";
+            var statusMsg = "Letter '" + key + "' was already guessed.";
             this.displayStatus(statusMsg);
+            this.displaySnark(true);
             return;
         }
 
@@ -128,9 +159,11 @@ wggController = {
         if (this.model.checkForDone()) {
             if (this.model.checkForWon()) {
                 this.displayStatus("You won! Press ANY key for new game.");
+                this.displaySnark(false);
             }
             else {
-                this.displayStatus("You lost! Is today the worst day of your life?");
+                this.displayStatus("You lost!");
+                this.displaySnark(true);
             }
             // Now wait to start a new game 
             // (by pressing the ANY key again)
