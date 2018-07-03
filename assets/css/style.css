@@ -25,7 +25,7 @@ body {
 #winsLabel, #winsDisplay, #guessesLeftLabel {
     font-family: Comic Sans, Comic Sans MS, cursive;
     font-size: 1em;
-    background-color: #f2efbd;
+    background-color: #fff;
     color: #4d5973;
     padding: .1em;
 }
@@ -33,7 +33,7 @@ body {
 #statusDisplay, #snarkDisplay {
     font-family: Comic Sans, Comic Sans MS, cursive;
     font-size: 1em;
-    background-color: #f2efbd;
+    background-color: #fff;
     color: #4d5973;
 }
 #snarkyDisplay {
