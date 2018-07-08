@@ -17,7 +17,7 @@ wggController = {
     // Called when page is first displayed
     initialize: function() {
         this.waitingForStart = true;
-        this.displayStatus("If you could just go ahead and press any key, that'd be great...");
+        this.displayStatus("If you could just go ahead and press (or click) any key, that'd be great...");
         this.displaySnarkClear();
         this.model = wggModel;
         this.model.initialize();
@@ -63,7 +63,7 @@ wggController = {
         elt.setAttribute("style", "width:" + perCent);
         elt.innerHTML = guessesLeft;
     },
-    makeSpanChildren: function(parent, string1, classToAdd) {
+    makeChildren: function(parent, eltType, string1, classToAdd) {
         var childList = parent.childNodes;
 
         // Remove all the previously added children
@@ -73,16 +73,17 @@ wggController = {
 
         // Add a new set of children
         for (var ii in string1) {
-            var newElt = document.createElement("span");
+            var newElt = document.createElement(eltType);
             newElt.innerText = string1.charAt(ii);
             newElt.setAttribute("class", classToAdd);
+            newElt.setAttribute("data-letter", string1.charAt(ii));
             parent.appendChild(newElt);
         }
     },
     displayCurrentWord: function(currentWord) {
         var s1 = (currentWord === "") ? "-" : currentWord;
         var elt = document.getElementById("currentWordDisplay");
-        this.makeSpanChildren(elt, s1, "currentWordLetter");
+        this.makeChildren(elt, "span", s1, "currentWordLetter");
     },
     displayGuessedLetters: function(letterArray) {
         // First create string of all letters
@@ -100,8 +101,19 @@ wggController = {
 
         // Now we can display it
         var elt = document.getElementById("guessedLettersDisplay");
-        this.makeSpanChildren(elt, s1, "guessedLetter");
+        this.makeChildren(elt, "button", s1, "guessedLetter");
+        $(".guessedLetter").on("click touchstart", function(e) {
+            // Fix for iPad
+            e.stopPropagation();
+            if (e.type != "click")
+                return;
 
+            let cc = $(this).attr("data-letter");
+            if (cc === ".")
+                return; // letter already guessed
+
+            wggController.processKeyPress(cc);
+        })
     },
 
     // Start new game

@@ -20,7 +20,8 @@ body {
     font-size: 1em;
     background-color: #f2efbd;
     color: #4d5973;
-    padding: .1em;
+    padding-left: .3em;
+    padding-right: .3em;
 }
 #winsLabel, #winsDisplay, #guessesLeftLabel {
     font-family: Comic Sans, Comic Sans MS, cursive;
