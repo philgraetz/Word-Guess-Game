@@ -6,7 +6,7 @@ body {
 
 #gameTitle {
     /* font-size: 3em; */
-    font-family: Comic Sans, Comic Sans MS, cursive;
+    font-family: Comic Sans MS, Arial, sans-serif;
 }
 .currentWordLetter {
     font-family: "Lucida Console", Monaco, monospace;
@@ -24,7 +24,7 @@ body {
     padding-right: .3em;
 }
 #winsLabel, #winsDisplay, #guessesLeftLabel {
-    font-family: Comic Sans, Comic Sans MS, cursive;
+    font-family: Comic Sans MS, Arial, sans-serif;
     font-size: 1em;
     background-color: #fff;
     color: #4d5973;
@@ -32,7 +32,7 @@ body {
 }
 
 #statusDisplay, #snarkDisplay {
-    font-family: Comic Sans, Comic Sans MS, cursive;
+    font-family: Comic Sans MS, Arial, sans-serif;
     font-size: 1em;
     background-color: #fff;
     color: #4d5973;
