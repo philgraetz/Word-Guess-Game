@@ -17,7 +17,7 @@ Attempt to guess the letters in the word within 15 guesses to win.
 - Used an MVC approach
 + View is the HTML
 + Controller is JS to update and read HTML
-+ Model is JS Opject
++ Model is JS Object
 
 
 
